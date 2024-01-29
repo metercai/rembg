@@ -62,7 +62,8 @@ class SiluetaSession(BaseSession):
         """
         fname = f"{cls.name()}.onnx"
         pooch.retrieve(
-            "https://github.com/danielgatis/rembg/releases/download/v0.0.0/silueta.onnx",
+            cls.pre_handle("https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/silueta.onnx", *args, **kwargs),
+            #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/silueta.onnx",
             None
             if cls.checksum_disabled(*args, **kwargs)
             else "md5:55e59e0d8062d2f5d013f4725ee84782",

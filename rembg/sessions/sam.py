@@ -282,7 +282,8 @@ class SamSession(BaseSession):
             fname_decoder = f"{model_name}.decoder.quant.onnx"
 
         pooch.retrieve(
-            f"https://github.com/danielgatis/rembg/releases/download/v0.0.0/{fname_encoder}",
+            cls.pre_handle(f"https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/{fname_encoder}", *args, **kwargs),
+            #f"https://github.com/danielgatis/rembg/releases/download/v0.0.0/{fname_encoder}",
             None,
             fname=fname_encoder,
             path=cls.u2net_home(*args, **kwargs),
@@ -290,7 +291,8 @@ class SamSession(BaseSession):
         )
 
         pooch.retrieve(
-            f"https://github.com/danielgatis/rembg/releases/download/v0.0.0/{fname_decoder}",
+            cls.pre_handle(f"https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/{fname_decoder}", *args, **kwargs),
+            #f"https://github.com/danielgatis/rembg/releases/download/v0.0.0/{fname_decoder}",
             None,
             fname=fname_decoder,
             path=cls.u2net_home(*args, **kwargs),
@@ -306,7 +308,8 @@ class SamSession(BaseSession):
 
             for i in range(1, 4):
                 pooch.retrieve(
-                    f"https://github.com/danielgatis/rembg/releases/download/v0.0.0/sam_vit_h_4b8939.encoder_data.{i}.bin",
+                    cls.pre_handle(f"https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/sam_vit_h_4b8939.encoder_data.{i}.bin", *args, **kwargs),
+                    #f"https://github.com/danielgatis/rembg/releases/download/v0.0.0/sam_vit_h_4b8939.encoder_data.{i}.bin",
                     None,
                     fname=f"sam_vit_h_4b8939.encoder_data.{i}.bin",
                     path=cls.u2net_home(*args, **kwargs),

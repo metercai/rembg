@@ -78,6 +78,12 @@ class BaseSession:
                 "U2NET_HOME", os.path.join(os.getenv("XDG_DATA_HOME", "~"), ".u2net")
             )
         )
+    
+    @classmethod
+    def pre_handle(cls, url, *args, **kwargs):
+        if os.getenv("HUF_MIRROR"):
+            return url.relpace("huggingface.co", os.getenv("HUF_MIRROR"))
+        return url
 
     @classmethod
     def download_models(cls, *args, **kwargs):

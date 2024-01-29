@@ -60,7 +60,7 @@ entry_points = {
 
 setup(
     name="rembg",
-    description="Remove image background",
+    description="Remove image background for SimpleSDXL",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/danielgatis/rembg",
