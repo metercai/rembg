@@ -60,7 +60,7 @@ class U2netSession(BaseSession):
         """
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
-            cls.pre_handle("https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/u2net.onnx", *args, **kwargs),
+            cls.pre_handle("https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2net.onnx", *args, **kwargs),
             #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx",
             None
             if cls.checksum_disabled(*args, **kwargs)

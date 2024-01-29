@@ -128,7 +128,7 @@ class Unet2ClothSession(BaseSession):
     def download_models(cls, *args, **kwargs):
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
-            cls.pre_handle("https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/u2net_cloth_seg.onnx", *args, **kwargs),
+            cls.pre_handle("https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2net_cloth_seg.onnx", *args, **kwargs),
             #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net_cloth_seg.onnx",
             None
             if cls.checksum_disabled(*args, **kwargs)

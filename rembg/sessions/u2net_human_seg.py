@@ -60,7 +60,7 @@ class U2netHumanSegSession(BaseSession):
         """
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
-            "https://huggingface.co/metercai/SimpleSDXL/resolve/main/inpaint/u2net_human_seg.onnx",
+            "https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2net_human_seg.onnx",
             #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net_human_seg.onnx",
             None
             if cls.checksum_disabled(*args, **kwargs)
