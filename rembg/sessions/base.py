@@ -82,7 +82,7 @@ class BaseSession:
     @classmethod
     def pre_handle(cls, url, *args, **kwargs):
         if os.getenv("HUF_MIRROR"):
-            return url.relpace("huggingface.co", os.getenv("HUF_MIRROR"))
+            return url.replace("huggingface.co", os.getenv("HUF_MIRROR"))
         return url
 
     @classmethod
