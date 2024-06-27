@@ -87,7 +87,7 @@ class Unet2ClothSession(BaseSession):
         pred = np.squeeze(pred, 0)
 
         mask = Image.fromarray(pred.astype("uint8"), mode="L")
-        mask = mask.resize(img.size, Image.LANCZOS)
+        mask = mask.resize(img.size, Image.Resampling.LANCZOS)
 
         masks = []
 
@@ -128,11 +128,12 @@ class Unet2ClothSession(BaseSession):
     def download_models(cls, *args, **kwargs):
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
-            cls.pre_handle("https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2net_cloth_seg.onnx", *args, **kwargs),
-            #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net_cloth_seg.onnx",
-            None
-            if cls.checksum_disabled(*args, **kwargs)
-            else "md5:2434d1f3cb744e0e49386c906e5a08bb",
+            "https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2net_cloth_seg.onnx",
+            (
+                None
+                if cls.checksum_disabled(*args, **kwargs)
+                else "md5:2434d1f3cb744e0e49386c906e5a08bb"
+            ),
             fname=fname,
             path=cls.u2net_home(*args, **kwargs),
             progressbar=True,

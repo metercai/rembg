@@ -42,7 +42,7 @@ class U2netHumanSegSession(BaseSession):
         pred = np.squeeze(pred)
 
         mask = Image.fromarray((pred * 255).astype("uint8"), mode="L")
-        mask = mask.resize(img.size, Image.LANCZOS)
+        mask = mask.resize(img.size, Image.Resampling.LANCZOS)
 
         return [mask]
 
@@ -61,10 +61,11 @@ class U2netHumanSegSession(BaseSession):
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
             "https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2net_human_seg.onnx",
-            #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net_human_seg.onnx",
-            None
-            if cls.checksum_disabled(*args, **kwargs)
-            else "md5:c09ddc2e0104f800e3e1bb4652583d1f",
+            (
+                None
+                if cls.checksum_disabled(*args, **kwargs)
+                else "md5:c09ddc2e0104f800e3e1bb4652583d1f"
+            ),
             fname=fname,
             path=cls.u2net_home(*args, **kwargs),
             progressbar=True,

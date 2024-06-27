@@ -3,13 +3,13 @@ build/
 dist/
 .venv/
 .direnv/
-*.spec
 *.egg-info/
 *.egg
 *.py[cod]
 __pycache__/
 *.so
 *~≈
+.env
 .envrc
 .python-version
 .idea

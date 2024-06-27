@@ -6,7 +6,7 @@ import sys
 from typing import IO
 
 import click
-from PIL import Image
+from PIL.Image import Image as PILImage
 
 from ..bg import remove
 from ..session_factory import new_session
@@ -94,7 +94,7 @@ from ..sessions import sessions_names
     "image_height",
     type=int,
 )
-def rs_command(
+def b_command(
     model: str,
     extras: str,
     image_width: int,
@@ -134,7 +134,7 @@ def rs_command(
         if not os.path.isdir(output_dir):
             os.makedirs(output_dir, exist_ok=True)
 
-    def img_to_byte_array(img: Image) -> bytes:
+    def img_to_byte_array(img: PILImage) -> bytes:
         buff = io.BytesIO()
         img.save(buff, format="PNG")
         return buff.getvalue()
@@ -162,7 +162,7 @@ def rs_command(
                 if not img_bytes:
                     break
 
-                img = Image.frombytes("RGB", (image_width, image_height), img_bytes)
+                img = PILImage.frombytes("RGB", (image_width, image_height), img_bytes)
                 output = remove(img, session=session, **kwargs)
 
                 if output_specifier:

@@ -42,7 +42,7 @@ class SiluetaSession(BaseSession):
         pred = np.squeeze(pred)
 
         mask = Image.fromarray((pred * 255).astype("uint8"), mode="L")
-        mask = mask.resize(img.size, Image.LANCZOS)
+        mask = mask.resize(img.size, Image.Resampling.LANCZOS)
 
         return [mask]
 
@@ -62,11 +62,12 @@ class SiluetaSession(BaseSession):
         """
         fname = f"{cls.name()}.onnx"
         pooch.retrieve(
-            cls.pre_handle("https://huggingface.co/metercai/rembg/resolve/main/inpaint/silueta.onnx", *args, **kwargs),
-            #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/silueta.onnx",
-            None
-            if cls.checksum_disabled(*args, **kwargs)
-            else "md5:55e59e0d8062d2f5d013f4725ee84782",
+            "https://huggingface.co/metercai/rembg/resolve/main/inpaint/silueta.onnx",
+            (
+                None
+                if cls.checksum_disabled(*args, **kwargs)
+                else "md5:55e59e0d8062d2f5d013f4725ee84782"
+            ),
             fname=fname,
             path=cls.u2net_home(*args, **kwargs),
             progressbar=True,

@@ -38,7 +38,7 @@ class U2netpSession(BaseSession):
         pred = np.squeeze(pred)
 
         mask = Image.fromarray((pred * 255).astype("uint8"), mode="L")
-        mask = mask.resize(img.size, Image.LANCZOS)
+        mask = mask.resize(img.size, Image.Resampling.LANCZOS)
 
         return [mask]
 
@@ -52,11 +52,12 @@ class U2netpSession(BaseSession):
         """
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
-            cls.pre_handle("https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2netp.onnx", *args, **kwargs),
-            #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx",
-            None
-            if cls.checksum_disabled(*args, **kwargs)
-            else "md5:8e83ca70e441ab06c318d82300c84806",
+            "https://huggingface.co/metercai/rembg/resolve/main/inpaint/u2netp.onnx",
+            (
+                None
+                if cls.checksum_disabled(*args, **kwargs)
+                else "md5:8e83ca70e441ab06c318d82300c84806"
+            ),
             fname=fname,
             path=cls.u2net_home(*args, **kwargs),
             progressbar=True,

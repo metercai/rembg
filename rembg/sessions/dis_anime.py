@@ -40,7 +40,7 @@ class DisSession(BaseSession):
         pred = np.squeeze(pred)
 
         mask = Image.fromarray((pred * 255).astype("uint8"), mode="L")
-        mask = mask.resize(img.size, Image.LANCZOS)
+        mask = mask.resize(img.size, Image.Resampling.LANCZOS)
 
         return [mask]
 
@@ -58,11 +58,12 @@ class DisSession(BaseSession):
         """
         fname = f"{cls.name(*args, **kwargs)}.onnx"
         pooch.retrieve(
-            cls.pre_handle(f"https://huggingface.co/metercai/rembg/resolve/main/inpaint/isnet-anime.onnx", *args, **kwargs),
-            #"https://github.com/danielgatis/rembg/releases/download/v0.0.0/isnet-anime.onnx",
-            None
-            if cls.checksum_disabled(*args, **kwargs)
-            else "md5:6f184e756bb3bd901c8849220a83e38e",
+            "https://huggingface.co/metercai/rembg/resolve/main/inpaint/isnet-anime.onnx",
+            (
+                None
+                if cls.checksum_disabled(*args, **kwargs)
+                else "md5:6f184e756bb3bd901c8849220a83e38e"
+            ),
             fname=fname,
             path=cls.u2net_home(*args, **kwargs),
             progressbar=True,
